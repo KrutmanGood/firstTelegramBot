@@ -1,6 +1,7 @@
 const token = '5462607539:AAHKyBBkU2epPdAjI0-t0uQys19XsGYdBOw';
 const firstButton = document.getElementById('firstButton');
 const secondButton = document.getElementById('secondButton');
+const correctEmojies = [ '🎲', '🎯','🏀', '⚽', '🎳', '🎰'];
 
 async function sendMessage(text) {
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
@@ -47,7 +48,7 @@ secondButton.onclick = function b() {
 
 
 
-  if (emoji == '🎲' || emoji == '🎯' || emoji == '🏀' || emoji == '⚽' || emoji == '🎳' || emoji == '🎰') {
+  if (correctEmojies.includes(emoji)) {
       sendDice(emoji);
   }
 }
