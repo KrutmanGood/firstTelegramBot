@@ -1,52 +1,50 @@
 const token = '5462607539:AAHKyBBkU2epPdAjI0-t0uQys19XsGYdBOw';
+const chatId = 851424962;
+
 const firstButton = document.getElementById('firstButton');
 const secondButton = document.getElementById('secondButton');
-const correctEmojies = [ '🎲', '🎯','🏀', '⚽', '🎳', '🎰'];
 
 async function sendMessage(text) {
   const url = `https://api.telegram.org/bot${token}/sendMessage`;
+  
   const params = {
-    chat_id: 851424962,
+    chat_id: chatId,
     text,
   };
 
-  const response = await fetch(url, {
+  await fetch(url, {
     method: 'POST',
     body: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json' },
   })
-  const result = await response.json();
 }
 
 async function sendDice(emoji) {
   const url = `https://api.telegram.org/bot${token}/sendDice`;
+  
   const params = {
-    chat_id: 851424962,
+    chat_id: chatId,
     emoji,
   };
 
-  const response = await fetch(url, {
+  await fetch(url, {
     method: 'POST',
     body: JSON.stringify(params),
     headers: { 'Content-Type': 'application/json' },
   })
-  const result = await response.json();
 }
 
-firstButton.onclick = function a() {
+firstButton.onclick = () => {
+  const text = prompt('В поле ниже введите текст, который необходимо отправить боту в лс', 'Ваш текст');
 
-  let text = prompt('В поле ниже введите текст, который необходимо отправить боту в лс', 'Ваш текст');
-
-  if (text != '') {
+  if (text) {
     sendMessage(text);
   }
 }
 
-secondButton.onclick = function b() {
-
-  let emoji = prompt('В поле ниже введите эмодзи, который необходимо отправить боту в лс', 'Ваш эмодзи');
-
-
+secondButton.onclick = () => {
+  const correctEmojies = [ '🎲', '🎯','🏀', '⚽', '🎳', '🎰'];
+  const emoji = prompt('В поле ниже введите эмодзи, который необходимо отправить боту в лс', 'Ваш эмодзи');
 
   if (correctEmojies.includes(emoji)) {
       sendDice(emoji);
